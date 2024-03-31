@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['shoaibshoukat987.pythonanywhere.com']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -68,6 +69,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'core.wsgi.application'
 

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+Signup
+{% endblock title %}
+
+{% block main_content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+<div class="container-fluid bg-light py-5">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-lg-6">
+      <div class="card shadow-lg rounded-3">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4">Sign Up</h2>
+          <form>
+            <div class="mb-3 animate__animated animate__fadeInDown">
+              <label for="exampleInputName" class="form-label">Name</label>
+              <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" required>
+            </div>
+            <div class="mb-3 animate__animated animate__fadeInDown">
+              <label for="exampleInputEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" required>
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="row animate__animated animate__fadeInDown">
+              <div class="col-md-6 mb-3">
+                <label for="exampleInputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="exampleInputConfirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="exampleInputConfirmPassword" required>
+              </div>
+            </div>
+            <div class="mb-3 animate__animated animate__fadeInDown">
+              <label for="exampleInputAddress" class="form-label">Address</label>
+              <textarea class="form-control" id="exampleInputAddress" rows="3" required></textarea>
+            </div>
+            <div class="mb-3 form-check animate__animated animate__fadeInDown">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block animate__animated animate__fadeInUp">Sign Up</button>
+          </form>
+        </div>
+        <div class="card-footer bg-white border-0 text-center">
+          <p class="mb-0">Already have an account? <a href="#">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main_content %}

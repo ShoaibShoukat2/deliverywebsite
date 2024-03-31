@@ -3,7 +3,9 @@ from .views import *
 
 urlpatterns = [
 
-    path('',index,name="index-pgae")
+    path('',index,name="index-pgae"),
+    path('signup/',signup,name="signup-page"),
+    path('login/',login,name="login-page")
 
 
 ]
