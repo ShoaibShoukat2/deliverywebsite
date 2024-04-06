@@ -1,0 +1,77 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block main_content %}
+ <!-- Project Card Example -->
+ <div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="{% static 'dashboard/img/roof.png' %}" alt="Vehicle Image" class="img-fluid">
+        </div>
+        <div class="col-md-12 text-center">
+            <button id="add-vehicle-btn" class="btn btn-primary mt-3">Add Vehicle</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="addVehicleModalLabel">Add Vehicle</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+
+        </div>
+        <div class="modal-body">
+          <form id="addVehicleForm" method="POST" action="">
+            <!-- Your form fields here -->
+            <div class="form-group">
+              <label for="vehicle_name">Swift ID:</label>
+              <input type="text" class="form-control" id="vehicle_name" name="vehicle_name">
+            </div>
+            <div class="form-group">
+                <label for="vehicle_name">Vehicle Name</label>
+                <input type="text" class="form-control" id="vehicle_name" name="vehicle_name">
+            </div>
+            <div class="form-group">
+                <label for="vehicle_name">Speed Limit</label>
+                <input type="text" class="form-control" id="vehicle_name" name="vehicle_name">
+            </div>
+            <div class="form-group">
+                <label for="vehicle_name">Stationary Limit</label>
+                <input type="text" class="form-control" id="vehicle_name" name="vehicle_name">
+            </div>
+            <div class="form-group">
+                <label for="vehicle_name">Mobile No</label>
+                <input type="text" class="form-control" id="vehicle_name" name="vehicle_name">
+            </div>
+            <!-- Add more form fields as needed -->
+            
+            {% csrf_token %}
+            <div class="text-center">
+              <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    // Function to handle click event on the "Add Vehicle" button
+    $("#add-vehicle-btn").click(function(){
+        // Open the modal dialog
+        $("#addVehicleModal").modal("show");
+    });
+});
+</script>
+
+{% endblock main_content %}
+
