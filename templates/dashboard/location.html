@@ -1,0 +1,119 @@
+{% extends 'dashboard/base.html' %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      border: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    #map-container { 
+      display: none; 
+      margin-top: 30px;
+    }
+    #map { 
+      height: 400px; 
+    }
+  </style>
+{% endblock extra_css %}
+
+{% block main_content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Add Starting and Ending Locations</h2>
+          <form id="location-form">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="start">Starting Location:</label>
+                <input type="text" class="form-control" id="start" name="start" placeholder="Enter starting location" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="end">Ending Location:</label>
+                <input type="text" class="form-control" id="end" name="end" placeholder="Enter ending location" required>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <div id="map-container">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var startInput = document.getElementById('start');
+    var endInput = document.getElementById('end');
+
+    var mapContainer = document.getElementById('map-container');
+    var map = L.map('map').setView([0, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    var startMarker, endMarker;
+
+    function addMarker(latlng, isStart) {
+      var marker = L.marker(latlng).addTo(map);
+      if (isStart) {
+        if (startMarker) map.removeLayer(startMarker);
+        startMarker = marker;
+      } else {
+        if (endMarker) map.removeLayer(endMarker);
+        endMarker = marker;
+      }
+    }
+
+    function initAutocomplete(input, isStart) {
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+        addMarker([place.geometry.location.lat(), place.geometry.location.lng()], isStart);
+      });
+    }
+
+    document.getElementById('location-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var startLocation = startInput.value;
+      var endLocation = endInput.value;
+      console.log('Starting Location:', startLocation);
+      console.log('Ending Location:', endLocation);
+      // You can perform further actions like sending the locations to the server.
+      
+      // Show map container
+      mapContainer.style.display = 'block';
+      
+      // Set map center to the midpoint of the two locations (for demonstration purposes)
+      var startLatLng = startMarker.getLatLng();
+      var endLatLng = endMarker.getLatLng();
+      var midpoint = [(startLatLng.lat + endLatLng.lat) / 2, (startLatLng.lng + endLatLng.lng) / 2];
+      map.setView(midpoint, 8);
+    });
+
+    initAutocomplete(startInput, true);
+    initAutocomplete(endInput, false);
+  });
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbJWoNVEym_yqpxVJruTwxszwX2hr608c&libraries=places"></script>
+{% endblock main_content %}
+
+

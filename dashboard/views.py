@@ -13,4 +13,9 @@ def index(request):
 def Vehicle(request):
     return render(request,'dashboard/Vehicle.html')
 
-    
+
+
+
+def LocationPage(request):
+    return render(request,'dashboard/location.html')
+
