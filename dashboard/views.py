@@ -19,3 +19,8 @@ def Vehicle(request):
 def LocationPage(request):
     return render(request,'dashboard/location.html')
 
+
+
+def Tasked_Page(request):
+    return render(request,'dashboard/assigned_task.html')
+

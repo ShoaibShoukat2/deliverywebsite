@@ -1,0 +1,75 @@
+{% extends 'dashboard/base.html' %}
+
+{% block main_content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-12"> <!-- Increase the width of the container -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Vehicle Information</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Swift ID</th>
+                  <th scope="col">Vehicle Name</th>
+                  <th scope="col">Speed Limit</th>
+                  <th scope="col">Stationary Limit</th>
+                  <th scope="col">Mobile</th>
+                  <th colspan="2">Destination</th> <!-- Span two columns for Start and End Destinations -->
+                  <th scope="col">Map</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>12345</td>
+                  <td>Car 1</td>
+                  <td>60 km/h</td>
+                  <td>5 min</td>
+                  <td>123-456-7890</td>
+                  <td>New York, USA</td>
+                  <td>Los Angeles, USA</td>
+                  <td><a href="#" onclick="showMap('New York, USA', 'Los Angeles, USA')"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>12345</td>
+                    <td>Car 1</td>
+                    <td>60 km/h</td>
+                    <td>5 min</td>
+                    <td>123-456-7890</td>
+                    <td>New York, USA</td>
+                    <td>Los Angeles, USA</td>
+                    <td><a href="#" onclick="showMap('New York, USA', 'Los Angeles, USA')"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
+                  </tr>
+                   <tr>
+                  <th scope="row">1</th>
+                  <td>12345</td>
+                  <td>Car 1</td>
+                  <td>60 km/h</td>
+                  <td>5 min</td>
+                  <td>123-456-7890</td>
+                  <td>New York, USA</td>
+                  <td>Los Angeles, USA</td>
+                  <td><a href="#" onclick="showMap('New York, USA', 'Los Angeles, USA')"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
+                </tr>
+                <!-- Add more rows as needed for additional data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showMap(startDestination, endDestination) {
+    console.log('Start Destination:', startDestination);
+    console.log('End Destination:', endDestination);
+    alert('Displaying map for: ' + startDestination + ' to ' + endDestination);
+  }
+</script>
+{% endblock main_content %}
