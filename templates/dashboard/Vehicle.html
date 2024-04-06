@@ -1,0 +1,71 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block main_content %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Vehicle Information</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Swift ID</th>
+                  <th scope="col">Vehicle Name</th>
+                  <th scope="col">Speed Limit</th>
+                  <th scope="col">Stationary Limit</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col">Actions</th> <!-- New column for the action icon -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>12345</td> <!-- Sample Swift ID -->
+                  <td>Car 1</td> <!-- Sample Vehicle Name -->
+                  <td>60 km/h</td> <!-- Sample Speed Limit -->
+                  <td>5 min</td> <!-- Sample Stationary Limit -->
+                  <td>123-456-7890</td> <!-- Sample Mobile -->
+                  <td><a href="#" onclick="openMap()"><i class="fas fa-map-marked-alt"></i> Add Direction</a></td> <!-- Icon without text -->
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>12345</td> <!-- Sample Swift ID -->
+                    <td>Car 1</td> <!-- Sample Vehicle Name -->
+                    <td>60 km/h</td> <!-- Sample Speed Limit -->
+                    <td>5 min</td> <!-- Sample Stationary Limit -->
+                    <td>123-456-7890</td> <!-- Sample Mobile -->
+                    <td><a href="#" onclick="openMap()"><i class="fas fa-map-marked-alt"></i> Add Direction</a></td> <!-- Icon without text -->
+                  </tr>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>12345</td> <!-- Sample Swift ID -->
+                    <td>Car 1</td> <!-- Sample Vehicle Name -->
+                    <td>60 km/h</td> <!-- Sample Speed Limit -->
+                    <td>5 min</td> <!-- Sample Stationary Limit -->
+                    <td>123-456-7890</td> <!-- Sample Mobile -->
+                    <td><a href="#" onclick="openMap()"><i class="fas fa-map-marked-alt"></i> Add Direction</a></td> <!-- Icon without text -->
+                  </tr>
+                <!-- Add more rows as needed for additional data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openMap() {
+    // Replace the URL with your map URL or embed code
+    window.open('https://www.google.com/maps', '_blank');
+  }
+</script>
+
+{% endblock main_content %}

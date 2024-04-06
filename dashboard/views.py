@@ -8,3 +8,9 @@ def index(request):
 
 
 
+
+
+def Vehicle(request):
+    return render(request,'dashboard/Vehicle.html')
+
+    
