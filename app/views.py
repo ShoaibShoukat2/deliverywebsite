@@ -17,7 +17,6 @@ def signup(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
-        address = request.POST.get('address')
         remember_me = request.POST.get('remember_me')
         
         if Signup.objects.filter(email=email).exists():
@@ -33,9 +32,8 @@ def signup(request):
             new_signup = Signup.objects.create(
                 name=first_name,
                 email=email,
-                password=hashed_password,  # Save the hashed password
-                address=address,
-                remember_me=remember_me  # Assuming remember_me is a boolean field
+                password=hashed_password,
+                remember_me=remember_me 
             )
 
 
@@ -60,6 +58,7 @@ def signup(request):
 
 def login(request):
     return render(request,'login.html')
+
 
 
 def contact(request):

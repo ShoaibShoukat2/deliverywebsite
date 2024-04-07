@@ -9,7 +9,6 @@ class Signup(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
-    address = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     remember_me = models.BooleanField(default=False)  # Add this line
 
