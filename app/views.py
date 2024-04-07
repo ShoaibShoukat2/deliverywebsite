@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from dashboard.models import Signup
 from django.http import JsonResponse
-from django.contrib.auth.hashers import make_password  # Import make_password
+from django.contrib.auth.hashers import make_password ,check_password # Import make_password
 # Create your views here.
 
 
@@ -48,16 +48,29 @@ def signup(request):
 
 
 
-
-
-
-
-
-
-
-
 def login(request):
-    return render(request,'login.html')
+    context = {}  # Initialize an empty context dictionary
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            user = Signup.objects.get(email=email)
+            if check_password(password, user.password):
+                request.session['user_email'] = email
+                context['success_message'] = 'Login successful'
+
+            else:
+                
+                context['error_message'] = 'Invalid email or password. Please try again.'
+                context['redirect_url'] = 'login'
+        except Signup.DoesNotExist:
+
+            context['error_message'] = 'Invalid email or password. Please try again.'
+            context['redirect_url'] = 'login'
+
+    return render(request, 'login.html',context)
+
 
 
 

@@ -12,30 +12,81 @@ Login
       <div class="card shadow-lg rounded-3">
         <div class="card-body p-5">
           <h2 class="text-center mb-4">Login</h2>
-          <form>
+          <form action="/login/" method="post">
+            {% csrf_token %}
             <div class="mb-3 animate__animated animate__fadeInDown">
               <label for="exampleInputEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3 animate__animated animate__fadeInDown">
               <label for="exampleInputPassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" required>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword" placeholder="Password" required>
             </div>
-            <div class="mb-3 form-check animate__animated animate__fadeInDown">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Remember me</label>
-            </div>
+           
             <button type="submit" class="btn btn-primary btn-block animate__animated animate__fadeInUp">Login</button>
           </form>
         </div>
         <div class="card-footer bg-white border-0 text-center">
-          <p class="mb-0">Don't have an account? <a href="#">Sign Up</a></p>
+          <p class="mb-0">Don't have an account? <a href="/signup">Sign Up</a></p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if error_message and redirect_url %}
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: "{{ error_message }}",
+  showClass: {
+    popup: 'animate__animated animate__zoomIn'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__zoomOut'
+  },
+  iconHtml: '<i class="fas fa-times-circle animate__animated animate__bounce"></i>',
+  showConfirmButton: true,
+  confirmButtonText: 'OK',
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = "/{{ redirect_url }}";
+  }
+});
+</script>
+
+{% elif success_message %}
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: 'Success!',
+    text: "{{ success_message }}",
+    showClass: {
+      popup: 'animate__animated animate__zoomIn'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__zoomOut'
+    },
+    iconHtml: '<i class="fas fa-check-circle animate__animated animate__bounce"></i>',
+    showConfirmButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "/";
+    }
+  });
+</script>
+
+{% endif %}
+
+
 {% endblock main_content %}
+
+
 
 
