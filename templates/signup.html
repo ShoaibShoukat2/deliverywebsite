@@ -12,36 +12,41 @@ Signup
       <div class="card shadow-lg rounded-3">
         <div class="card-body p-5">
           <h2 class="text-center mb-4">Sign Up</h2>
-          <form>
+          <form id="signupForm" method="post" action="/signup/">
+            {% csrf_token %}
             <div class="mb-3 animate__animated animate__fadeInDown">
-              <label for="exampleInputName" class="form-label">Name</label>
-              <input type="text" class="form-control" id="exampleInputName" aria-describedby="nameHelp" required>
+                <label for="exampleInputName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="exampleInputName" name="fname" aria-describedby="nameHelp" required>
             </div>
             <div class="mb-3 animate__animated animate__fadeInDown">
-              <label for="exampleInputEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" required>
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="exampleInputEmail" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail" name="email" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="row animate__animated animate__fadeInDown">
-              <div class="col-md-6 mb-3">
-                <label for="exampleInputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="exampleInputConfirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="exampleInputConfirmPassword" required>
-              </div>
+                <div class="col-md-6 mb-3">
+                    <label for="exampleInputPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword" name="password" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="exampleInputConfirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="exampleInputConfirmPassword" name="confirm_password" required>
+                    <div id="passwordError" class="text-danger"></div>
+                </div>
             </div>
             <div class="mb-3 animate__animated animate__fadeInDown">
-              <label for="exampleInputAddress" class="form-label">Address</label>
-              <textarea class="form-control" id="exampleInputAddress" rows="3" required></textarea>
+                <label for="exampleInputAddress" class="form-label">Address</label>
+                <textarea class="form-control" id="exampleInputAddress" name="address" rows="3" required></textarea>
             </div>
             <div class="mb-3 form-check animate__animated animate__fadeInDown">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Remember me</label>
+              <input type="hidden" name="remember_me" value="False"> <!-- Hidden input to set default value -->
+                <input type="checkbox" required class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember me</label>
             </div>
+            
             <button type="submit" class="btn btn-primary btn-block animate__animated animate__fadeInUp">Sign Up</button>
-          </form>
+        </form>
+    
         </div>
         <div class="card-footer bg-white border-0 text-center">
           <p class="mb-0">Already have an account? <a href="#">Login</a></p>
@@ -50,4 +55,87 @@ Signup
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const passwordField = document.getElementById('exampleInputPassword');
+  const confirmPasswordField = document.getElementById('exampleInputConfirmPassword');
+  const passwordError = document.getElementById('passwordError');
+
+  // Function to check if password and confirm password fields match
+  function validatePassword() {
+    if (passwordField.value !== confirmPasswordField.value) {
+      passwordError.textContent = 'Passwords do not match';
+    } else {
+      passwordError.textContent = '';
+    }
+  }
+
+  // Event listeners to trigger password validation on input
+  passwordField.addEventListener('input', validatePassword);
+  confirmPasswordField.addEventListener('input', validatePassword);
+
+ 
+});
+
+
+// JavaScript to toggle the value of the hidden input based on checkbox state
+document.addEventListener('DOMContentLoaded', function () {
+        const checkbox = document.getElementById('exampleCheck1');
+        const hiddenInput = document.querySelector('input[name="remember_me"]');
+        
+        checkbox.addEventListener('change', function() {
+            hiddenInput.value = this.checked ? 'True' : 'False';
+        });
+    });
+</script>
+
+{% if error_message and redirect_url %}
+<script>
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: "{{ error_message }}",
+  showClass: {
+    popup: 'animate__animated animate__zoomIn'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__zoomOut'
+  },
+  iconHtml: '<i class="fas fa-times-circle animate__animated animate__bounce"></i>',
+  showConfirmButton: true,
+  confirmButtonText: 'OK',
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = "/{{ redirect_url }}";
+  }
+});
+</script>
+
+{% elif success_message and redirect_url %}
+<script>
+  Swal.fire({
+    icon: 'success',
+    title: 'Success!',
+    text: "{{ success_message }}",
+    showClass: {
+      popup: 'animate__animated animate__zoomIn'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__zoomOut'
+    },
+    iconHtml: '<i class="fas fa-check-circle animate__animated animate__bounce"></i>',
+    showConfirmButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "/{{ redirect_url }}";
+    }
+  });
+</script>
+{% endif %}
+
+
 {% endblock main_content %}
+

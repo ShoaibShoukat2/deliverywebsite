@@ -24,3 +24,5 @@ def LocationPage(request):
 def Tasked_Page(request):
     return render(request,'dashboard/assigned_task.html')
 
+
+
