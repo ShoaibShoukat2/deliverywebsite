@@ -13,3 +13,8 @@ class SignupAdmin(admin.ModelAdmin):
 
 
 
+@admin.register(Vehicle)
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ('id','name', 'user', 'speed_limit', 'stationary_limit', 'mobile_no')
+
+

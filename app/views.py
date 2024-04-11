@@ -58,7 +58,10 @@ def login(request):
             user = Signup.objects.get(email=email)
             if check_password(password, user.password):
                 request.session['user_email'] = email
+                request.session['user_id'] = user.id
                 context['success_message'] = 'Login successful'
+
+
 
             else:
                 
@@ -84,3 +87,4 @@ def about(request):
     return render(request,'about.html')
 
     
+

@@ -16,6 +16,18 @@ class Signup(models.Model):
         return self.name
 
 
+class Vehicle(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Signup, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    speed_limit = models.IntegerField()  
+    stationary_limit = models.IntegerField()  
+    mobile_no = models.CharField(max_length=15) 
+
+    def __str__(self):
+        return self.name
+
+
 
 
 
