@@ -61,8 +61,6 @@ def login(request):
                 request.session['user_id'] = user.id
                 context['success_message'] = 'Login successful'
 
-
-
             else:
                 
                 context['error_message'] = 'Invalid email or password. Please try again.'
@@ -86,5 +84,6 @@ def contact(request):
 def about(request):
     return render(request,'about.html')
 
-    
+
+
 
