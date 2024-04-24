@@ -41,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'dashboard'
+    'dashboard',
+    'rest_framework',
+    'channels'
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,11 +74,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.custom_context_processors.session_value',
             ],
         },
     },
 ]
-
 
 
 WSGI_APPLICATION = 'core.wsgi.application'

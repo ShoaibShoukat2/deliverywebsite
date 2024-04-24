@@ -22,40 +22,19 @@
                 </tr>
               </thead>
               <tbody>
+                {% for vehicle in vehicles %}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>12345</td>
-                  <td>Car 1</td>
-                  <td>60 km/h</td>
-                  <td>5 min</td>
-                  <td>123-456-7890</td>
-                  <td>New York, USA</td>
-                  <td>Los Angeles, USA</td>
-                  <td><a href="#" onclick="showMap('New York, USA', 'Los Angeles, USA')"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ vehicle.id }}</td>
+                  <td>{{ vehicle.name }}</td>
+                  <td>{{ vehicle.speed_limit }} km/h</td>
+                  <td>{{ vehicle.stationary_limit }} min</td>
+                  <td>{{ vehicle.mobile_no }}</td>
+                  <td>{{ vehicle.starting_address }}</td>
+                  <td>{{ vehicle.ending_address }}</td>
+                  <td><a href="/dashboard/AssignedTask/map/{{vehicle.id}}"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
                 </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td>
-                    <td>Car 1</td>
-                    <td>60 km/h</td>
-                    <td>5 min</td>
-                    <td>123-456-7890</td>
-                    <td>New York, USA</td>
-                    <td>Los Angeles, USA</td>
-                    <td><a href="#" onclick="showMap('New York, USA', 'Los Angeles, USA')"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
-                  </tr>
-                   <tr>
-                  <th scope="row">1</th>
-                  <td>12345</td>
-                  <td>Car 1</td>
-                  <td>60 km/h</td>
-                  <td>5 min</td>
-                  <td>123-456-7890</td>
-                  <td>New York, USA</td>
-                  <td>Los Angeles, USA</td>
-                  <td><a href="#" onclick="showMap('New York, USA', 'Los Angeles, USA')"><i class="fas fa-map-marked-alt"></i> Show Map</a></td>
-                </tr>
-                <!-- Add more rows as needed for additional data -->
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -66,12 +45,7 @@
 </div>
 
 
-<script>
-  function showMap(startDestination, endDestination) {
-    console.log('Start Destination:', startDestination);
-    console.log('End Destination:', endDestination);
-    alert('Displaying map for: ' + startDestination + ' to ' + endDestination);
-  }
-</script>
 {% endblock main_content %}
+
+
 

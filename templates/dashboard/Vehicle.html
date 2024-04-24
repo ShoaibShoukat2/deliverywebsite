@@ -15,43 +15,30 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Swift ID</th>
+                  <th scope="col">User</th>
                   <th scope="col">Vehicle Name</th>
                   <th scope="col">Speed Limit</th>
                   <th scope="col">Stationary Limit</th>
                   <th scope="col">Mobile</th>
-                  <th scope="col">Actions</th> <!-- New column for the action icon -->
+                  <th scope="col">Actions</th> <!-- New column for the action icons -->
                 </tr>
               </thead>
               <tbody>
+                {% for vehicle in VehicleData %}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>12345</td> <!-- Sample Swift ID -->
-                  <td>Car 1</td> <!-- Sample Vehicle Name -->
-                  <td>60 km/h</td> <!-- Sample Speed Limit -->
-                  <td>5 min</td> <!-- Sample Stationary Limit -->
-                  <td>123-456-7890</td> <!-- Sample Mobile -->
-                  <td><a href="/dashboard/location"><i class="fas fa-map-marked-alt"></i> Add Direction</a></td> <!-- Icon without text -->
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ vehicle.user }}</td>
+                  <td>{{ vehicle.name }}</td>
+                  <td>{{ vehicle.speed_limit }} km/h</td>
+                  <td>{{ vehicle.stationary_limit }} min</td>
+                  <td>{{ vehicle.mobile_no }}</td>
+                  <td>
+                      <a href="/dashboard/location/{{ vehicle.id }}"><i class="fas fa-map-marked-alt"></i> Add Direction</a> <!-- Link for adding direction -->
+                      <a href="/dashboard/location/delete/{{ vehicle.id }}" class="text-danger ml-2"><i class="fas fa-trash-alt"></i></a> <!-- Link for deleting -->
+                  </td>
                 </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td> <!-- Sample Swift ID -->
-                    <td>Car 1</td> <!-- Sample Vehicle Name -->
-                    <td>60 km/h</td> <!-- Sample Speed Limit -->
-                    <td>5 min</td> <!-- Sample Stationary Limit -->
-                    <td>123-456-7890</td> <!-- Sample Mobile -->
-                    <td><a href="#" onclick="openMap()"><i class="fas fa-map-marked-alt"></i> Add Direction</a></td> <!-- Icon without text -->
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>12345</td> <!-- Sample Swift ID -->
-                    <td>Car 1</td> <!-- Sample Vehicle Name -->
-                    <td>60 km/h</td> <!-- Sample Speed Limit -->
-                    <td>5 min</td> <!-- Sample Stationary Limit -->
-                    <td>123-456-7890</td> <!-- Sample Mobile -->
-                    <td><a href="#" onclick="openMap()"><i class="fas fa-map-marked-alt"></i> Add Direction</a></td> <!-- Icon without text -->
-                  </tr>
-                <!-- Add more rows as needed for additional data -->
+                {% endfor %}
+
               </tbody>
             </table>
           </div>

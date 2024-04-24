@@ -1,8 +1,12 @@
 from django.shortcuts import render,redirect
 from dashboard.models import Signup
+
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password ,check_password # Import make_password
 # Create your views here.
+
+
+
 
 
 def index(request):
@@ -37,6 +41,7 @@ def signup(request):
             )
 
 
+
             context['success_message'] = 'submitted successfully'
             context['redirect_url'] = 'login'
 
@@ -45,6 +50,9 @@ def signup(request):
 
 
     return render(request, 'signup.html',context) 
+
+
+
 
 
 
@@ -87,3 +95,8 @@ def about(request):
 
 
 
+def logout(request):
+    del request.session['user_email']
+    del request.session['user_id']
+
+    return redirect('/')

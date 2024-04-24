@@ -15,6 +15,20 @@ class SignupAdmin(admin.ModelAdmin):
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ('id','name', 'user', 'speed_limit', 'stationary_limit', 'mobile_no')
+    list_display = (
+        'id',
+        'name',
+        'user',
+        'speed_limit',
+        'stationary_limit', 
+        'mobile_no',
+        'starting_address',
+        'ending_address',
+        'starting_latitude',
+        'starting_longitude',
+        'ending_latitude',
+        'ending_latitude'
+        )
+
 
 

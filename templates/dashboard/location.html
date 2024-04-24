@@ -11,16 +11,22 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title text-center mb-4">Add Starting and Ending Locations</h2>
-          <form id="location-form" method="post" action="#">
+          <form id="location-form" method="post" action="/dashboard/location/{{ id }}">
             {% csrf_token %}
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="start">Starting Location:</label>
-                <input type="text" class="form-control" id="start" name="start" placeholder="Enter starting location" required>
+                <input type="text" class="form-control" id="start" name="start_address" placeholder="Enter starting location" required>
+                <!-- Input fields for latitude and longitude -->
+                <input type="text" hidden class="form-control" id="start_lat" name="start_lat" readonly>
+                <input type="text" hidden class="form-control" id="start_lng" name="start_lng" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label for="end">Ending Location:</label>
-                <input type="text" class="form-control" id="end" name="end" placeholder="Enter ending location" required>
+                <input type="text" class="form-control" id="end" name="end_address" placeholder="Enter ending location" required>
+                <!-- Input fields for latitude and longitude -->
+                <input type="text" hidden class="form-control" id="end_lat" name="end_lat" readonly>
+                <input type="text" hidden class="form-control" id="end_lng" name="end_lng" readonly>
               </div>
             </div>
             <div class="text-center">
@@ -33,13 +39,16 @@
   </div>
 </div>
 
-
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbJWoNVEym_yqpxVJruTwxszwX2hr608c&libraries=places"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var startInput = document.getElementById('start');
     var endInput = document.getElementById('end');
+    var startLatInput = document.getElementById('start_lat');
+    var startLngInput = document.getElementById('start_lng');
+    var endLatInput = document.getElementById('end_lat');
+    var endLngInput = document.getElementById('end_lng');
 
     function initAutocomplete(input, isStart) {
       var autocomplete = new google.maps.places.Autocomplete(input);
@@ -49,18 +58,28 @@
           window.alert("No details available for input: '" + input.value + "'");
           return;
         }
-        // You can perform any necessary actions here based on the selected place
+        // Extracting latitude and longitude
+        var lat = place.geometry.location.lat();
+        var lng = place.geometry.location.lng();
+        console.log("Latitude: " + lat + ", Longitude: " + lng);
+        // You can do whatever you want with lat and lng here
+
+        // Displaying the address name
+        console.log("Address: " + place.formatted_address);
+
+        // Update input fields with latitude and longitude
+        if (isStart) {
+          startLatInput.value = lat;
+          startLngInput.value = lng;
+        } else {
+          endLatInput.value = lat;
+          endLngInput.value = lng;
+        }
       });
     }
-
-
-   
 
     initAutocomplete(startInput, true);
     initAutocomplete(endInput, false);
   });
 </script>
 {% endblock main_content %}
-
-
-

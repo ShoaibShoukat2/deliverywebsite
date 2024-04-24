@@ -23,9 +23,27 @@ class Vehicle(models.Model):
     speed_limit = models.IntegerField()  
     stationary_limit = models.IntegerField()  
     mobile_no = models.CharField(max_length=15) 
+    starting_address = models.CharField(max_length=255, default='')  # Add starting address field with default value as empty string
+    ending_address = models.CharField(max_length=255, default='')    # Add ending address field with default value as empty string
+    starting_latitude = models.FloatField(null=True, blank=True)
+    starting_longitude = models.FloatField(null=True, blank=True)
+    ending_latitude = models.FloatField(null=True, blank=True)
+    ending_longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
